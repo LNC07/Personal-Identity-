@@ -22,8 +22,16 @@
             <form id="idForm" onsubmit="generateCard(event)">
                 <label>Name:</label><br>
                 <input type="text" id="name" required><br>
-                <label>School Name:</label><br>
-                <input type="text" id="school" required><br>
+                <label>Select School/College:</label><br>
+                <select id="schoolSelect" required>
+                    <option value="">Select</option>
+                    <option value="School A">School A</option>
+                    <option value="School B">School B</option>
+                    <option value="College A">College A</option>
+                    <option value="College B">College B</option>
+                </select><br>
+                <label>School/College Name (if other):</label><br>
+                <input type="text" id="schoolName"><br>
                 <label>Date of Birth:</label><br>
                 <input type="date" id="dob" required><br>
                 <label>Relationship Status:</label><br>
@@ -35,6 +43,13 @@
                 <div id="partnerNameContainer" style="display: none;">
                     <label>Partner's Name:</label><br>
                     <input type="text" id="partnerName"><br>
+                    <label>Relationship Duration (Days):</label><br>
+                    <input type="number" id="relationshipDuration"><br>
+                    <label>Long Distance Relationship:</label><br>
+                    <select id="longDistanceRelationship">
+                        <option value="no">No</option>
+                        <option value="yes">Yes</option>
+                    </select><br>
                 </div>
                 <button type="submit" class="button">Submit</button>
             </form>
@@ -44,9 +59,13 @@
             <h2>Personal ID Card</h2>
             <img id="profileImage" src="" alt="Random Profile" />
             <p><strong>Name:</strong> <span id="cardName"></span></p>
-            <p><strong>School Name:</strong> <span id="cardSchool"></span></p>
+            <p><strong>School/College:</strong> <span id="cardSchool"></span></p>
+            <p><strong>Other School/College Name:</strong> <span id="cardSchoolName"></span></p>
             <p><strong>Date of Birth:</strong> <span id="cardDob"></span></p>
             <p><strong>Relationship Status:</strong> <span id="cardStatus"></span></p>
+            <p><strong>Partner's Name:</strong> <span id="cardPartner"></span></p>
+            <p><strong>Relationship Duration (Days):</strong> <span id="cardDuration"></span></p>
+            <p><strong>Long Distance Relationship:</strong> <span id="cardDistance"></span></p>
             <p><strong>ID Number:</strong> <span id="cardId"></span></p>
             <button class="button" onclick="downloadCard()">Download Card</button>
         </div>
@@ -68,9 +87,13 @@
             var randomImage = 'https://picsum.photos/100?random=' + Math.floor(Math.random() * 1000);
 
             document.getElementById('cardName').innerText = document.getElementById('name').value;
-            document.getElementById('cardSchool').innerText = document.getElementById('school').value;
+            document.getElementById('cardSchool').innerText = document.getElementById('schoolSelect').value;
+            document.getElementById('cardSchoolName').innerText = document.getElementById('schoolName').value || 'N/A';
             document.getElementById('cardDob').innerText = document.getElementById('dob').value;
             document.getElementById('cardStatus').innerText = document.getElementById('relationshipStatus').value;
+            document.getElementById('cardPartner').innerText = document.getElementById('partnerName').value || 'N/A';
+            document.getElementById('cardDuration').innerText = document.getElementById('relationshipDuration').value || 'N/A';
+            document.getElementById('cardDistance').innerText = document.getElementById('longDistanceRelationship').value;
             document.getElementById('cardId').innerText = id;
             document.getElementById('profileImage').src = randomImage;
 
