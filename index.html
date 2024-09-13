@@ -78,7 +78,7 @@
             <p><strong>ID Number:</strong> <span id="cardId"></span></p>
         </div>
         
-        <button class="button" id="downloadButton" onclick="downloadCard()" style="display: none; margin-top: 20px;">Download Card</button>
+        <button class="button" id="downloadButton" onclick="downloadCard()" style="display: none;">Download Card</button>
     </div>
 
     <script>
@@ -120,7 +120,9 @@
                 var link = document.createElement('a');
                 link.href = canvas.toDataURL('image/png');
                 link.download = 'personal_id_card.png';
-                link.click();
+                document.body.appendChild(link); // Append link to body
+                link.click(); // Trigger the download
+                document.body.removeChild(link); // Remove link after triggering download
             });
         }
     </script>
