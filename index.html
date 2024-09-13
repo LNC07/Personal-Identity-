@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Card Generator</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .card { border: 1px solid #000; padding: 20px; margin-top: 20px; display: none; }
+    </style>
+</head>
+<body>
+    <h1>লাভ কার্ড তৈরি করুন</h1>
+    <button onclick="openForm()">Love</button>
+
+    <div id="formContainer" style="display: none;">
+        <h2>তথ্য প্রবেশ করান</h2>
+        <form id="loveForm" onsubmit="generateCard(event)">
+            <label>নাম:</label><br>
+            <input type="text" id="name" required><br>
+            <label>স্কুলের নাম:</label><br>
+            <input type="text" id="school" required><br>
+            <label>জন্ম তারিখ:</label><br>
+            <input type="date" id="dob" required><br>
+            <label>সম্পর্কের অবস্থা:</label><br>
+            <select id="relationshipStatus" onchange="togglePartnerName()" required>
+                <option value="">চয়ন করুন</option>
+                <option value="single">Single</option>
+                <option value="inRelationship">In a Relationship</option>
+            </select><br>
+            <div id="partnerNameContainer" style="display: none;">
+                <label>সঙ্গীর নাম:</label><br>
+                <input type="text" id="partnerName"><br>
+            </div>
+            <button type="submit">সাবমিট</button>
+        </form>
+    </div>
+
+    <div class="card" id="idCard">
+        <h2>ID Card</h2>
+        <p><strong>নাম:</strong> <span id="cardName"></span></p>
+        <p><strong>স্কুলের নাম:</strong> <span id="cardSchool"></span></p>
+        <p><strong>জন্ম তারিখ:</strong> <span id="cardDob"></span></p>
+        <p><strong>সম্পর্কের অবস্থা:</strong> <span id="cardStatus"></span></p>
+        <p><strong>আইডি নম্বর:</strong> <span id="cardId"></span></p>
+    </div>
+
+    <script>
+        function openForm() {
+            document.getElementById('formContainer').style.display = 'block';
+        }
+
+        function togglePartnerName() {
+            var status = document.getElementById('relationshipStatus').value;
+            document.getElementById('partnerNameContainer').style.display = (status === 'inRelationship') ? 'block' : 'none';
+        }
+
+        function generateCard(event) {
+            event.preventDefault();
+            var id = 'ID-' + Math.floor(Math.random() * 10000);
+
+            document.getElementById('cardName').innerText = document.getElementById('name').value;
+            document.getElementById('cardSchool').innerText = document.getElementById('school').value;
+            document.getElementById('cardDob').innerText = document.getElementById('dob').value;
+            document.getElementById('cardStatus').innerText = document.getElementById('relationshipStatus').value;
+            document.getElementById('cardId').innerText = id;
+
+            document.getElementById('idCard').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
